@@ -7,7 +7,7 @@ import { flex } from "../UI/common";
 import SocialLogin from "../components/login/SocialLogin";
 import { useSelector } from "react-redux";
 import LoginSuccessModal from "../components/login/LoginSuccessModal";
-import Layout from "../components/common/Layout";
+import AlertModal from "../components/common/modal/AlertModal";
 
 const Login = () => {
   const queryClient = useQueryClient();
@@ -34,7 +34,12 @@ const Login = () => {
         <span>간편로그인</span>
         <hr />
       </BoundaryLine>
+      <AlertModal
+          bigTxt={"점검 중이에요!"}
+          smallTxt={"다음에 다시 시도해주세요"}
+        >
       <SocialLogin />
+      </AlertModal>
       {loginModal && <LoginSuccessModal showModal />}
     </>
   );
