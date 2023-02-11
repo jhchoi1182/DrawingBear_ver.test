@@ -20,6 +20,18 @@
 
 <details>
 <summary>
+처음 서비스를 접하는 사용자를 위한 튜토리얼 기능
+</summary>
+<div>
+
+![image](https://user-images.githubusercontent.com/116577489/218278466-630b53bd-97a2-48fa-9aa0-67ddf4a6078a.png)
+
+
+</details>
+
+
+<details>
+<summary>
 다이어리 색상, 제목 자유롭게 설정 가능
 </summary>
 <div>
@@ -39,27 +51,6 @@
 
 </details>
 
-<details>
-<summary>
-사용자 초대로 일기장 공유
-</summary>
-<div>
-
-![Untitled (3)](https://user-images.githubusercontent.com/108935568/216936867-20cd1472-2973-4870-a9b2-2158a1f7fa11.png)
-
-</details>
-
-<details>
-<summary>
-실시간 알람과 채팅 기능
-</summary>
-<div>
-
-![image](https://user-images.githubusercontent.com/116577489/218279782-255f7f0d-5189-4d92-ba29-6fe5b1611a58.png)
-
-![image](https://user-images.githubusercontent.com/116577489/218279896-3fb2379e-8b57-4030-9085-0167d38f87fd.png)
-
-</details>
 
 <details>
 <summary>
@@ -85,16 +76,6 @@
 
 </details>
 
-<details>
-<summary>
-처음 서비스를 접하는 사용자를 위한 튜토리얼 기능
-</summary>
-<div>
-
-![image](https://user-images.githubusercontent.com/116577489/218278466-630b53bd-97a2-48fa-9aa0-67ddf4a6078a.png)
-
-
-</details>
 
 <details>
 <summary>
@@ -104,8 +85,30 @@
 
 ![image](https://user-images.githubusercontent.com/116577489/218278930-9dfabd11-4f83-423d-bd37-25f4f1311d0d.png)
 
+</details>
+
+<details>
+<summary>
+사용자 초대로 일기장 공유
+</summary>
+<div>
+
+![Untitled (3)](https://user-images.githubusercontent.com/108935568/216936867-20cd1472-2973-4870-a9b2-2158a1f7fa11.png)
 
 </details>
+
+<details>
+<summary>
+실시간 알림 기능과 채팅 기능
+</summary>
+<div>
+
+![image](https://user-images.githubusercontent.com/116577489/218279782-255f7f0d-5189-4d92-ba29-6fe5b1611a58.png)
+
+![image](https://user-images.githubusercontent.com/116577489/218279896-3fb2379e-8b57-4030-9085-0167d38f87fd.png)
+
+</details>
+
 
 <br><br><br>
 
@@ -285,7 +288,7 @@ Footer에서만 일어나고 있다는 것에 주목.
 컴파운드 패턴 적용기
 </summary>
 <div>
-https://jhchoi1182.tistory.com/140
+https://jhchoi1182.tistory.com/139
 <div>
 </details>
 
@@ -293,7 +296,7 @@ https://jhchoi1182.tistory.com/140
 
 
 
-## :white_check_mark: 내가 작업한 기능
+## :white_check_mark: 내가 작업한 기능들
 
 | 기능   |
 | ------ |
