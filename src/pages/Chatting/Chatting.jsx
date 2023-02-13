@@ -6,36 +6,24 @@ import io from "socket.io-client";
 import { useRef } from "react";
 import BeforChat from "../../components/chatting/BeforChat";
 import ChatItem from "../../components/chatting/ChatItem";
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { chattingApi } from "../../apis/axios";
-import { useInView } from "react-intersection-observer";
 import { Header } from "../../components/common/header/Header";
 
 const Chatting = () => {
+  const [btnColor, setBtnColor] = useState("button_icon");
+  const [messageList, setMessageList] = useState([]);
+  const [message, setMessage] = useState("");
   const socket = useRef(null);
   const ref = useRef();
-  const [message, setMessage] = useState("");
-  const [messageList, setMessageList] = useState([]);
+  
   const { diaryId, userId, invitedNickname } = JSON.parse(localStorage.getItem("chattingId"));
-  const socketData = {
-    message,
-    diaryId,
-    userId,
-  };
-  const [btnColor, setBtnColor] = useState("button_icon");
-  const [infi, setInfi] = useState({
-    diaryId,
-    pageParam: 1,
-  });
-  const { inViewref, inView } = useInView({
-    threshold: 0,
-    triggerOnce: true,
-  });
+  const socketData = { message, diaryId, userId };
+  
   const onKeyPressEventHandle = (event) => {
     if (event.key === "Enter") {
       messageSendOnclick();
     }
   };
+
   const messageOnChangeHandle = (event) => {
     let txt = event.target.value;
     if (txt.length === 0) {
@@ -45,6 +33,7 @@ const Chatting = () => {
     }
     setMessage(txt);
   };
+
   const messageSendOnclick = () => {
     if (message.trim().length !== 0) {
       socket.current.emit("chat_message", socketData, () => {
@@ -53,23 +42,6 @@ const Chatting = () => {
       setMessage("");
     }
   };
-
-  const { data, error, isLoading, isError, fetchNextPage, hasNextPage } = useInfiniteQuery(
-    ["chattings"],
-    () => chattingApi.search(infi),
-
-    {
-      getNextPageParam: (lastPage) => (!lastPage.isLast ? lastPage.nextPage : undefined),
-    },
-    {
-      staleTime: 1000,
-    }
-  );
-  useEffect(() => {
-    if (inView) {
-      fetchNextPage();
-    }
-  }, [inView]);
 
   useEffect(() => {
     socket.current = io.connect(process.env.REACT_APP_MY_API);

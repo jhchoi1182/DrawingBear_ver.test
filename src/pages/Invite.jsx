@@ -1,32 +1,30 @@
 import styled from "styled-components";
+import { useRef, useState } from "react";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
+import { inviteApi, mypageApi } from "../apis/axios";
 import { flex, StSection } from "../UI/common";
 import { BsSearch } from "react-icons/bs";
 import NavigateBtn from "../components/common/NavigateBtn";
-import { useRef, useState } from "react";
-import Toast from "./Toast";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { inviteApi, mypageApi } from "../apis/axios";
-import { useQueryClient } from "@tanstack/react-query";
-
-import { useParams } from "react-router-dom";
+import Toast from "../components/invite/Toast";
 import useDispatchHook from "../hooks/useDispatchHook";
 import Buttons from "../components/common/Button/Buttons";
 import {Header} from "../components/common/header/Header";
 
 const Invite = () => {
-  const [name, setName] = useState("");
-  const [isInvite, setIsInvite] = useState(false);
   const [inviteUserInfo, setInviteUserInfo] = useState({});
   const [hostUserInfo, setHostUserInfo] = useState({});
+  const [isInvite, setIsInvite] = useState(false);
   const [popup, setPopup] = useState(false);
+  const [name, setName] = useState("");
   const queryClient = useQueryClient();
-  const { openAlertModal } = useDispatchHook();
   const socket = useRef(null);
   const { id } = useParams();
+  const { openAlertModal } = useDispatchHook();
+
   const { data } = useQuery(["setting"], mypageApi.read);
-  const nameChangeHandle = (event) => {
-    setName(event.target.value);
-  };
+
   const { mutate: inviteSearchMutate } = useMutation(
     (name) => inviteApi.search(name),
     {
@@ -48,6 +46,7 @@ const Invite = () => {
       },
     }
   );
+
   const { mutate: inviteMutate } = useMutation(
     (inviteData) => inviteApi.invite(inviteData),
     {
@@ -62,11 +61,16 @@ const Invite = () => {
       },
     }
   );
-
+  
+  const nameChangeHandle = (event) => {
+    setName(event.target.value);
+  };
+  
   const userSearchOnclickHandle = () => {
     inviteSearchMutate(name);
     setHostUserInfo({ ...data.userInfo });
   };
+
   const userInviteOnClickHandle = () => {
     const inviteData = {
       diaryId: Number(id),

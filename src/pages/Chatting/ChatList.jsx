@@ -1,28 +1,30 @@
-import Footer from "../../components/common/Footer";
-import styled from "styled-components";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { alarmApi, mypageApi } from "../../apis/axios";
-import NoChatList from "../../components/chatting/NoChatList";
 import { useNavigate } from "react-router-dom";
+import NoChatList from "../../components/chatting/NoChatList";
+import Footer from "../../components/common/Footer";
+import styled from "styled-components";
+import { alarmApi, mypageApi } from "../../apis/axios";
 import { Header } from "../../components/common/header/Header";
 
 const ChatList = () => {
   const [chatList, setChatList] = useState([]);
-
-  const navigate = useNavigate();
   const [userId, setUserId] = useState("");
+  const navigate = useNavigate();
+
   const userInfo = useQuery(["read"], mypageApi.read, {
     onSuccess: (success) => {
       setUserId(success.userInfo.userId);
     },
   });
+
   const { data } = useQuery(["chatlist"], alarmApi.chatlist, {
     onError: (error) => {},
     onSuccess: (success) => {
       setChatList([...success.diaries]);
     },
   });
+
   const chattingOnclickHandle = (userId, diaryId, invitedNickname) => {
     localStorage.setItem(
       "chattingId",
@@ -31,6 +33,7 @@ const ChatList = () => {
     // dispatch(viewChatList({ userId, diaryId, invitedNickname }));
     navigate("/chat");
   };
+
   return (
     <>
       <Header>
@@ -58,7 +61,7 @@ const ChatList = () => {
                 >
                   <ChatWrapper>
                     <div>
-                      <img src={invitedProfileImg} />
+                      <img src={invitedProfileImg} alt=""/>
                     </div>
                     <div>
                       <ChatNickName>{invitedNickname}</ChatNickName>
@@ -84,14 +87,6 @@ const ChatList = () => {
 };
 export default ChatList;
 
-const ChatWarrper = styled.div`
-  position: absolute;
-  display: flex;
-  gap: 1rem;
-  left: 1rem;
-  top: 50%;
-  transform: translate(0, -50%);
-`;
 const ChatContent = styled.div`
   width: 100%;
   height: calc(100vh - 7.2rem);

@@ -1,14 +1,14 @@
-import { useMutation } from "@tanstack/react-query";
 import { useRef, useState } from "react";
+import { useMutation } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { TiPencil } from "react-icons/ti";
+import coupleDiaryBear from "../assets/images/coupleDiaryBear.webp";
+import soloDiaryBear from "../assets/images/soloDiaryBear.webp";
+import useDispatchHook from "../hooks/useDispatchHook";
+import Diary from "../components/main/Diary/Diary";
 import { mainApi } from "../apis/axios";
 import { flex } from "../UI/common";
-import { TiPencil } from "react-icons/ti";
-import soloDiaryBear from "../assets/images/soloDiaryBear.webp";
-import coupleDiaryBear from "../assets/images/coupleDiaryBear.webp";
-import Diary from "../components/main/Diary/Diary";
-import useDispatchHook from "../hooks/useDispatchHook";
 import { Header } from "../components/common/header/Header";
 
 const color = ["#FF8181", "#FFCA7A", "#FFE99A", "#A4F5A3", "#9CDBF7", "#BB9EFA"];
