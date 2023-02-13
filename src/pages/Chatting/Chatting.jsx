@@ -1,25 +1,22 @@
 import styled from "styled-components";
 import { AiOutlineArrowUp } from "react-icons/ai";
-import Button from "../components/common/Button";
+import Button from "../../components/common/Button";
 import { useEffect, useState } from "react";
 import io from "socket.io-client";
 import { useRef } from "react";
-import { useSelector } from "react-redux";
-import BeforChat from "./BeforChat";
-import ChatItem from "./ChatItem";
+import BeforChat from "../../components/chatting/BeforChat";
+import ChatItem from "../../components/chatting/ChatItem";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { chattingApi } from "../apis/axios";
+import { chattingApi } from "../../apis/axios";
 import { useInView } from "react-intersection-observer";
-import { Header } from "../components/common/header/Header";
+import { Header } from "../../components/common/header/Header";
 
 const Chatting = () => {
   const socket = useRef(null);
   const ref = useRef();
   const [message, setMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
-  const { diaryId, userId, invitedNickname } = JSON.parse(
-    localStorage.getItem("chattingId")
-  );
+  const { diaryId, userId, invitedNickname } = JSON.parse(localStorage.getItem("chattingId"));
   const socketData = {
     message,
     diaryId,
@@ -57,19 +54,17 @@ const Chatting = () => {
     }
   };
 
-  const { data, error, isLoading, isError, fetchNextPage, hasNextPage } =
-    useInfiniteQuery(
-      ["chattings"],
-      () => chattingApi.search(infi),
+  const { data, error, isLoading, isError, fetchNextPage, hasNextPage } = useInfiniteQuery(
+    ["chattings"],
+    () => chattingApi.search(infi),
 
-      {
-        getNextPageParam: (lastPage) =>
-          !lastPage.isLast ? lastPage.nextPage : undefined,
-      },
-      {
-        staleTime: 1000,
-      }
-    );
+    {
+      getNextPageParam: (lastPage) => (!lastPage.isLast ? lastPage.nextPage : undefined),
+    },
+    {
+      staleTime: 1000,
+    }
+  );
   useEffect(() => {
     if (inView) {
       fetchNextPage();
@@ -83,7 +78,7 @@ const Chatting = () => {
       socket.current.disconnect();
     };
   }, []);
-  
+
   useEffect(() => {
     socket.current._callbacks = {};
     socket.current.on("receiveMessage", (message) => {
@@ -105,13 +100,7 @@ const Chatting = () => {
           <BeforChat diaryId={diaryId} userId={userId}></BeforChat>
 
           {messageList.map((msg, index) => {
-            const {
-              message,
-              nickname,
-              profileImg,
-              time,
-              userId: msg_userId,
-            } = msg;
+            const { message, nickname, profileImg, time, userId: msg_userId } = msg;
             const chatInfo = {
               User: {
                 profileImg,
@@ -131,13 +120,7 @@ const Chatting = () => {
                 ></ChatItem>
               );
             } else {
-              return (
-                <ChatItem
-                  key={`messageList${index}`}
-                  chatInfo={chatInfo}
-                  bgcolor="#ffffff"
-                ></ChatItem>
-              );
+              return <ChatItem key={`messageList${index}`} chatInfo={chatInfo} bgcolor="#ffffff"></ChatItem>;
             }
           })}
         </ChatWrapper>
@@ -152,12 +135,7 @@ const Chatting = () => {
           />
         </div>
         <div onClick={messageSendOnclick}>
-          <Button
-            size="mini"
-            color={btnColor}
-            icon={<AiOutlineArrowUp />}
-            round
-          />
+          <Button size="mini" color={btnColor} icon={<AiOutlineArrowUp />} round />
         </div>
       </ChatFooter>
     </>

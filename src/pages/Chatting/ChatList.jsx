@@ -1,13 +1,11 @@
-import Footer from "../components/common/Footer";
+import Footer from "../../components/common/Footer";
 import styled from "styled-components";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { alarmApi, mypageApi } from "../apis/axios";
-import { useDispatch } from "react-redux";
-import NoChatList from "./NoChatList";
-
+import { alarmApi, mypageApi } from "../../apis/axios";
+import NoChatList from "../../components/chatting/NoChatList";
 import { useNavigate } from "react-router-dom";
-import { Header } from "../components/common/header/Header";
+import { Header } from "../../components/common/header/Header";
 
 const ChatList = () => {
   const [chatList, setChatList] = useState([]);

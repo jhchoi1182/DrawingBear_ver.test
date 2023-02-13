@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { flex } from "../UI/common";
-import noChatListBear from "../assets/images/noChatListBear.webp"; //혜민님 그림 이거 쓰세요
+import { flex } from "../../UI/common";
+import noChatListBear from "../../assets/images/noChatListBear.webp"; //혜민님 그림 이거 쓰세요
 const NoChatList = ({ h3txt = "아직 연결된 다이어리가 없어요" }) => {
   return (
     <>

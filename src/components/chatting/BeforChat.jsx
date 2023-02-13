@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { chattingApi } from "../apis/axios";
+import { chattingApi } from "../../apis/axios";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroller";
