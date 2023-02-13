@@ -39,10 +39,6 @@ const Detail = () => {
 
   const { mutate: postMutate } = useMutation({
     mutationFn: (comments) => commentsApi.post(comments),
-    onError: (err) => {
-      const status = err?.response.request.status;
-      status === 401 && openAlertModal({ bigTxt: "상대방의 일기는 삭제할 수 없어요!" });
-    },
     onSuccess: () => {
       queryClient.invalidateQueries(["posts"]);
     },
@@ -50,6 +46,10 @@ const Detail = () => {
 
   const { mutate: postDeleteMutate } = useMutation({
     mutationFn: () => postsApi.delete(postId),
+    onError: (err) => {
+      const status = err?.response.request.status;
+      status === 401 && openAlertModal({ bigTxt: "상대방의 일기는 삭제할 수 없어요!" });
+    },
     onSuccess: () => {
       queryClient.invalidateQueries(["Allposts"]);
       navigate(`/list/${diaryId}`);
