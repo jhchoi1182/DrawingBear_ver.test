@@ -6,14 +6,13 @@ import NoDiary from "../components/main/NoDiary";
 import Footer from "../components/common/Footer";
 import BookmarkTab from "../components/main/BookmarkTab";
 import useDispatchHook from "../hooks/useDispatchHook";
-import Loading from "../components/common/Loading";
 import LogoHeader from "../components/common/header/LogoHeader";
 
 const Main = () => {
   const { diaryTypes } = useSelector((state) => state.diarySlice);
   const { openAlertModal } = useDispatchHook();
 
-  const { data = [], isLoading } = useQuery(["main"], mainApi.read, {
+  const { data = [] } = useQuery(["main"], mainApi.read, {
     onError: (error) => {
       const { status } = error?.response.request;
       if (status === 400)

@@ -3,7 +3,6 @@ import styled, { css } from "styled-components";
 import { useParams } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { postsApi } from "../apis/axios";
-
 import Canvas from "../components/common/canvas/Canvas";
 import HashTagInput from "../components/common/HashTagInput";
 import NavigateBtn from "../components/common/NavigateBtn";
