@@ -30,7 +30,6 @@ const ChatList = () => {
       "chattingId",
       JSON.stringify({ diaryId, userId, invitedNickname })
     );
-    // dispatch(viewChatList({ userId, diaryId, invitedNickname }));
     navigate("/chat");
   };
 
