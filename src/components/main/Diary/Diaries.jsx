@@ -5,9 +5,9 @@ import { Pagination } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
 import "./styles.css";
-import DiarySettingModal from "./DiarySettingModal/DiarySettingModal";
-import Diary from "./Diary/Diary";
-import { flex } from "../../UI/common";
+import DiarySettingModal from "../DiarySettingModal/DiarySettingModal";
+import Diary from "./Diary";
+import { flex } from "../../../UI/common";
 import { FiMoreVertical } from "react-icons/fi";
 
 const Diaries = ({ diaryData }) => {
