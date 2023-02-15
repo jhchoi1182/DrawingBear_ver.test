@@ -6,14 +6,12 @@ import styled from "styled-components";
 import { mainApi } from "../apis/axios";
 import Diary from "../components/main/Diary/Diary";
 import { TiPencil } from "react-icons/ti";
-import soloDiaryBear from "../assets/images/soloDiaryBear.webp";
-import coupleDiaryBear from "../assets/images/coupleDiaryBear.webp";
 import useDispatchHook from "../hooks/useDispatchHook";
 import Loading from "../components/common/Loading";
 import { Header } from "../components/common/header/Header";
-import { ColorPicker, CreateDiaryBox, CreateLogoBear, Footer } from "./CreateDiary";
-
-const color = ["#FF8181", "#FFCA7A", "#FFE99A", "#A4F5A3", "#9CDBF7", "#BB9EFA"];
+import { CreateDiaryBox } from "./CreateDiary";
+import ColorPickerFooter from "../components/Create&UpdateDiary/ColorPickerFooter";
+import CreatePageLogo from "../components/Create&UpdateDiary/CreatePageLogo";
 
 const UpdateDiary = () => {
   const { couple } = useSelector((state) => state.diarySlice);
@@ -64,26 +62,13 @@ const UpdateDiary = () => {
             </Header.SpaceBetween>
           </Header>
           <UpdateDiaryBox>
-            <UpdateLogoBear>
-              <img src={couple === 0 ? soloDiaryBear : coupleDiaryBear} alt="다이어리 생성 곰돌이 그림" />
-              <span>{couple === 0 ? "혼자써요 !" : "같이써요 !"}</span>
-            </UpdateLogoBear>
+            <CreatePageLogo />
             <div className="pencilIcon-box">
               <TiPencil />
             </div>
             <input type="text" defaultValue={updateDiaryData[0].diaryName} ref={diaryTitleInputRef} />
             <Diary bgColor={selectedColor} />
-            <UpdateDiaryFooter>
-              {color.map((color, i) => {
-                return (
-                  <UpdateDiaryColorPicker
-                    key={`updateDiaryColorPicker${i}`}
-                    color={color}
-                    onClick={() => setSelectedColor(color)}
-                  ></UpdateDiaryColorPicker>
-                );
-              })}
-            </UpdateDiaryFooter>
+            <ColorPickerFooter setSelectedColor={setSelectedColor} />
           </UpdateDiaryBox>
         </>
       )}
@@ -94,9 +79,3 @@ const UpdateDiary = () => {
 export default UpdateDiary;
 
 const UpdateDiaryBox = styled(CreateDiaryBox)``;
-
-const UpdateLogoBear = styled(CreateLogoBear)``;
-
-const UpdateDiaryFooter = styled(Footer)``;
-
-const UpdateDiaryColorPicker = styled(ColorPicker)``;
