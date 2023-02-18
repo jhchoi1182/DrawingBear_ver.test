@@ -28,7 +28,7 @@ const Signup = () => {
       const msg = error.response.data.message;
       const errorStatus = error.response.status;
 
-      if (errorStatus === 409) openAlertModal({ bigTxt: msg });
+      errorStatus === 409 && openAlertModal({ bigTxt: msg });
     },
   });
 

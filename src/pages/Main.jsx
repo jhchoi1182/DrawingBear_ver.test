@@ -15,30 +15,15 @@ const Main = () => {
   const { data = [] } = useQuery(["main"], mainApi.read, {
     onError: (error) => {
       const { status } = error?.response.request;
-      if (status === 400)
-        openAlertModal({
-          bigTxt: "다이어리 조회에 실패했습니다.",
-          move: "/login",
-        });
-      else if (status === 404)
-        openAlertModal({
-          bigTxt: "다이어리 조회에 실패했습니다.",
-          move: "/login",
-        });
+      status === 400 && openAlertModal({ bigTxt: "다이어리 조회에 실패했습니다.", move: "/login" });
+      status === 404 && openAlertModal({ bigTxt: "다이어리 조회에 실패했습니다.", move: "/login" });
     },
   });
 
   const diaryType = (diaries) => {
-    if (diaryTypes.couple === 0) {
-      const soloDiary = diaries?.filter((diary) => diary.couple === 0);
-      return soloDiary;
-    } else if (diaryTypes.couple === 1) {
-      const coupleDiary = diaries?.filter((diary) => diary.couple === 1);
-      return coupleDiary;
-    } else if (diaryTypes.bookmark === 1) {
-      const favoriteDiary = diaries?.filter((diary) => diary.bookmark === 1);
-      return favoriteDiary;
-    }
+    diaryTypes.couple === 0 && diaries?.filter((diary) => diary.couple === 0);
+    diaryTypes.couple === 1 && diaries?.filter((diary) => diary.couple === 1);
+    diaryTypes.bookmark === 1 && diaries?.filter((diary) => diary.bookmark === 1);
   };
 
   return (

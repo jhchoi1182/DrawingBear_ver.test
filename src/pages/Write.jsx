@@ -35,15 +35,9 @@ const Write = () => {
     },
     onError: (error) => {
       const status = error?.response.request.status;
-      status === 401 &&
-        openAlertModal({ bigTxt: "인증되지 않은 사용자입니다." });
-      status === 404 &&
-        openAlertModal({ isModal: true, bigTxt: "잘못된 접근입니다." });
-      status === 412 &&
-        openAlertModal({
-          isModal: true,
-          bigTxt: "아직 작성하지 않은 항목이 있습니다.",
-        });
+      status === 401 && openAlertModal({ bigTxt: "인증되지 않은 사용자입니다." });
+      status === 404 && openAlertModal({ isModal: true, bigTxt: "잘못된 접근입니다." });
+      status === 412 && openAlertModal({ isModal: true, bigTxt: "아직 작성하지 않은 항목이 있습니다." });
     },
   });
 
@@ -53,8 +47,7 @@ const Write = () => {
 
   const writeFormSubmitHandler = (event) => {
     event.preventDefault();
-    if (!contents)
-      return openAlertModal({ bigTxt: "아직 내용을 입력하지 않았어요 !" });
+    if (!contents) return openAlertModal({ bigTxt: "아직 내용을 입력하지 않았어요 !" });
     let blob = imgUrlConvertBlob(canvas);
     let formData = new FormData(event.target);
 
@@ -69,8 +62,7 @@ const Write = () => {
 
   const nextSectionHeaderHandler = useCallback(() => {
     const title = titleRef.current.value;
-    if (!title)
-      return openAlertModal({ bigTxt: "아직 제목을 입력하지 않았어요 !" });
+    if (!title) return openAlertModal({ bigTxt: "아직 제목을 입력하지 않았어요 !" });
     else setIsDrawingEnd(!isDrawingEnd);
   }, []);
 
@@ -84,15 +76,11 @@ const Write = () => {
     return () => document.removeEventListener("keydown", preventTabKey);
   }, []);
 
-
   return (
     <>
       <Header flex justify="space-between" aline="center">
         {isDrawingEnd ? (
-          <WritePageSubmitHeader
-            setIsDrawingEnd={setIsDrawingEnd}
-            isDrawingEnd={isDrawingEnd}
-          />
+          <WritePageSubmitHeader setIsDrawingEnd={setIsDrawingEnd} isDrawingEnd={isDrawingEnd} />
         ) : (
           <StDefaultHeaderBox>
             <div className="default-header-aline">
@@ -121,13 +109,7 @@ const Write = () => {
             </StTextSectionBox>
             <StTextSectionBox className="textInputBox">
               <span>제목</span>
-              <input
-                type="text"
-                name="title"
-                ref={titleRef}
-                maxLength="20"
-                placeholder="제목을 입력해주세요"
-              />
+              <input type="text" name="title" ref={titleRef} maxLength="20" placeholder="제목을 입력해주세요" />
             </StTextSectionBox>
             <StTextSectionBox className="weatherPickerBox">
               <span>오늘의 날씨는 ?</span>

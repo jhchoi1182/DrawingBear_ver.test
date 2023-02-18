@@ -18,7 +18,7 @@ const DiaryManage = () => {
   } = useQuery(["main"], mainApi.read, {
     onError: (error) => {
       const { status } = error?.response.request;
-      if (status === 400) openAlertModal({ bigTxt: "일기장 조회에 실패했습니다.", move: "/login" });
+      status === 400 && openAlertModal({ bigTxt: "일기장 조회에 실패했습니다.", move: "/login" });
     },
   });
 

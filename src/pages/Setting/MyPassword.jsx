@@ -18,12 +18,12 @@ const MyPassword = () => {
   } = useForm({ mode: "onChange" });
 
   const { mutate } = useMutation((formData) => mypageApi.PWupdate(formData), {
-    onSuccess: (data) => {
-      openAlertModal({ bigTxt: data.message, move: "/setting" });
-    },
     onError: (error) => {
       const errorStatus = error.response.status;
-      if (errorStatus === 401) openAlertModal({ bigTxt: "현재 비밀번호가 틀렸습니다." });
+      errorStatus === 401 && openAlertModal({ bigTxt: "현재 비밀번호가 틀렸습니다." });
+    },
+    onSuccess: (data) => {
+      openAlertModal({ bigTxt: data.message, move: "/setting" });
     },
   });
 

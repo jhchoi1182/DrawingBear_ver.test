@@ -20,7 +20,7 @@ const CreateDiary = () => {
   const { mutate } = useMutation((addData) => mainApi.create(addData), {
     onError: (error) => {
       const status = error?.response.request.status;
-      if (status === 500) openAlertModal({ bigTxt: "다이어리 생성에 실패하였습니다." });
+      status === 500 && openAlertModal({ bigTxt: "다이어리 생성에 실패하였습니다." });
     },
     onSuccess: () => {
       openAlertModal({ bigTxt: "다이어리 생성 성공!", move: "/" });
