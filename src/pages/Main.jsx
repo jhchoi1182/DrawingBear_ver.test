@@ -14,16 +14,20 @@ const Main = () => {
 
   const { data = [] } = useQuery(["main"], mainApi.read, {
     onError: (error) => {
-      const { status } = error?.response.request;
+      const { status } = error.response.request;
       status === 400 && openAlertModal({ bigTxt: "다이어리 조회에 실패했습니다.", move: "/login" });
       status === 404 && openAlertModal({ bigTxt: "다이어리 조회에 실패했습니다.", move: "/login" });
     },
   });
 
   const diaryType = (diaries) => {
-    diaryTypes.couple === 0 && diaries?.filter((diary) => diary.couple === 0);
-    diaryTypes.couple === 1 && diaries?.filter((diary) => diary.couple === 1);
-    diaryTypes.bookmark === 1 && diaries?.filter((diary) => diary.bookmark === 1);
+    if (diaryTypes.couple === 0) {
+      return diaries?.filter((diary) => diary.couple === 0);
+    } else if (diaryTypes.couple === 1) {
+      return diaries?.filter((diary) => diary.couple === 1);
+    } else if (diaryTypes.bookmark === 1) {
+      return diaries?.filter((diary) => diary.bookmark === 1);
+    }
   };
 
   return (
